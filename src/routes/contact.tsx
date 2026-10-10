@@ -5,7 +5,7 @@ import { products } from "@/data/products";
 import { PageHero } from "@/components/site/Layout";
 
 export const Route = createFileRoute("/contact")({
-  validateSearch: (s: Record<string, unknown>): { product?: string } => ({ product: typeof s.product === "string" ? s.product : undefined }),
+  validateSearch: (s: Record<string, unknown>): { product?: string | undefined } => ({ product: typeof s["product"] === "string" ? (s["product"] as string) : undefined }),
   head: () => ({
     meta: [
       { title: "Contact — AES Energy" },

@@ -79,7 +79,7 @@ function Home() {
                 <Award className="h-8 w-8 text-primary" />
                 <h3 className="mt-4 text-2xl font-extrabold">{n}</h3>
                 <p className="mt-2 text-muted-foreground">{d}</p>
-                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">View product <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id ?? "" }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">View product <ArrowRight className="h-4 w-4" /></Link>
               </div>
             ))}
           </div>
