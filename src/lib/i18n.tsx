@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-type Lang = "en" | "tr";
+export type Lang = "en" | "tr";
+
 const dict = {
   home: { en: "Home", tr: "Ana Sayfa" },
   about: { en: "About", tr: "Hakkımızda" },
@@ -21,18 +22,35 @@ const dict = {
 } as const;
 
 type Key = keyof typeof dict;
-const Ctx = createContext<{ lang: Lang; toggle: () => void; t: (k: Key) => string }>({
-  lang: "en",
-  toggle: () => {},
-  t: (k) => dict[k].en,
-});
+interface Ctx {
+  lang: Lang;
+  toggle: () => void;
+  t: (k: Key) => string;
+  tx: (en: string, tr: string) => string;
+}
+const LangCtx = createContext<Ctx>({ lang: "en", toggle: () => {}, t: (k) => dict[k].en, tx: (en) => en });
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
+  useEffect(() => {
+    const saved = localStorage.getItem("aes-lang");
+    if (saved === "tr" || saved === "en") setLang(saved);
+  }, []);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    localStorage.setItem("aes-lang", lang);
+  }, [lang]);
   return (
-    <Ctx.Provider value={{ lang, toggle: () => setLang((l) => (l === "en" ? "tr" : "en")), t: (k) => dict[k][lang] }}>
+    <LangCtx.Provider
+      value={{
+        lang,
+        toggle: () => setLang((l) => (l === "en" ? "tr" : "en")),
+        t: (k) => dict[k][lang],
+        tx: (en, tr) => (lang === "tr" ? tr : en),
+      }}
+    >
       {children}
-    </Ctx.Provider>
+    </LangCtx.Provider>
   );
 }
-export const useLang = () => useContext(Ctx);
+export const useLang = () => useContext(LangCtx);
