@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Activity, ShieldCheck, ScanSearch, Gauge, Award } from "lucide-react";
-import { categories } from "@/data/products";
+import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
@@ -18,8 +18,18 @@ export const Route = createFileRoute("/")({
 const icons = { omnigrid: Activity, omnisafe: ShieldCheck, omnidetect: ScanSearch, omniasset: Gauge } as const;
 
 function Home() {
-  const { t } = useLang();
-  const omni = categories.filter((c) => c.id !== "other-products");
+  const { t, tx, lang } = useLang();
+  const omni = categories.filter((c) => c.id !== "other-products").map((c) => locCategory(c, lang));
+  const metrics: [string, string][] = [
+    ["99.9%", tx("Grid Uptime Target", "Şebeke Süreklilik Hedefi")],
+    ["10,000+", tx("Monitored Points", "İzlenen Nokta")],
+    ["20+", tx("Years of Engineering Experience", "Yıllık Mühendislik Deneyimi")],
+    ["100%", tx("Field Tested", "Sahada Test Edildi")],
+  ];
+  const partners: [string, string, string][] = [
+    ["Applied Precision", tx("Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "Türkiye ve Irak resmi distribütörü — otomatik elektrik sayacı test masaları ve kalibrasyon sistemleri."), "applied-precision-meter-test"],
+    ["Vicentinos", tx("Silicone rubber composite insulators and line hardware for transmission and distribution.", "İletim ve dağıtım için silikon kauçuk kompozit izolatörler ve hat donanımı."), "vicentinos-insulators"],
+  ];
   return (
     <>
       <section className="bg-gradient-navy grid-pattern text-navy-foreground">
@@ -36,8 +46,8 @@ function Home() {
 
       <section className="bg-surface py-20">
         <div className="container-page">
-          <h2 className="text-3xl font-extrabold tracking-tight">The OMNI Family</h2>
-          <p className="mt-2 text-muted-foreground">Four integrated product lines for a reliable, safe and efficient grid.</p>
+          <h2 className="text-3xl font-extrabold tracking-tight">{tx("The OMNI Family", "OMNI Ailesi")}</h2>
+          <p className="mt-2 text-muted-foreground">{tx("Four integrated product lines for a reliable, safe and efficient grid.", "Güvenilir, güvenli ve verimli bir şebeke için dört entegre ürün ailesi.")}</p>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {omni.map((c) => {
               const Icon = icons[c.id as keyof typeof icons];
@@ -57,8 +67,8 @@ function Home() {
 
       <section className="py-16 border-y">
         <div className="container-page grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[["99.9%", "Grid Uptime Target"], ["10,000+", "Monitored Points"], ["20+ yrs", "Engineering Experience"], ["100%", "Field Tested"]].map(([v, l]) => (
-            <div key={l}>
+          {metrics.map(([v, l]) => (
+            <div key={v}>
               <div className="text-4xl font-extrabold text-primary">{v}</div>
               <div className="mt-1 text-sm font-medium text-muted-foreground">{l}</div>
             </div>
@@ -68,18 +78,15 @@ function Home() {
 
       <section className="py-20">
         <div className="container-page">
-          <h2 className="text-3xl font-extrabold tracking-tight">Official Representations</h2>
-          <p className="mt-2 text-muted-foreground">Trusted global manufacturers, represented and supported locally by AES.</p>
+          <h2 className="text-3xl font-extrabold tracking-tight">{tx("Official Representations", "Resmi Temsilcilikler")}</h2>
+          <p className="mt-2 text-muted-foreground">{tx("Trusted global manufacturers, represented and supported locally by AES.", "AES tarafından yerel olarak temsil edilen ve desteklenen güvenilir küresel üreticiler.")}</p>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {[
-              ["Applied Precision", "Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "applied-precision-meter-test"],
-              ["Vicentinos", "Silicone rubber composite insulators and line hardware for transmission and distribution.", "vicentinos-insulators"],
-            ].map(([n, d, id]) => (
+            {partners.map(([n, d, id]) => (
               <div key={n} className="card-hover rounded-xl border bg-card p-8">
                 <Award className="h-8 w-8 text-primary" />
                 <h3 className="mt-4 text-2xl font-extrabold">{n}</h3>
                 <p className="mt-2 text-muted-foreground">{d}</p>
-                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id ?? "" }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">View product <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("View product", "Ürünü incele")} <ArrowRight className="h-4 w-4" /></Link>
               </div>
             ))}
           </div>
@@ -89,8 +96,8 @@ function Home() {
       <section className="pb-20">
         <div className="container-page">
           <div className="rounded-2xl bg-gradient-primary px-8 py-14 text-center text-primary-foreground">
-            <h2 className="text-3xl font-extrabold">Ready to make your grid smarter?</h2>
-            <p className="mt-3 opacity-90">Talk to our engineers about your network's monitoring and safety needs.</p>
+            <h2 className="text-3xl font-extrabold">{tx("Ready to make your grid smarter?", "Şebekenizi daha akıllı hale getirmeye hazır mısınız?")}</h2>
+            <p className="mt-3 opacity-90">{tx("Talk to our engineers about your network's monitoring and safety needs.", "Şebekenizin izleme ve güvenlik ihtiyaçlarını mühendislerimizle konuşun.")}</p>
             <Link to="/contact" className="mt-8 inline-flex rounded-md bg-navy px-6 py-3 font-semibold text-navy-foreground hover:bg-navy-2">{t("sales")}</Link>
           </div>
         </div>

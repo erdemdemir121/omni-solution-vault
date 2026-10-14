@@ -1,15 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import type { Product } from "@/data/products";
+import { locProduct, type Product } from "@/data/products";
 import { Tag } from "./Layout";
 import { useLang } from "@/lib/i18n";
 
-export function ProductCard({ p }: { p: Product }) {
-  const { t } = useLang();
+export function ProductCard({ p: raw }: { p: Product }) {
+  const { t, lang } = useLang();
+  const p = locProduct(raw, lang);
   return (
     <article className="card-hover flex flex-col rounded-xl border bg-card p-6">
       <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
-      <p className="mt-1 text-sm font-medium text-primary">{p.subtitleTr}</p>
+      <p className="mt-1 text-sm font-medium text-primary">{p.subtitle}</p>
       <p className="mt-3 flex-1 text-sm text-muted-foreground">{p.short}</p>
       <div className="mt-4 flex flex-wrap gap-1.5">{p.tags.map((tg) => <Tag key={tg}>{tg}</Tag>)}</div>
       <Link to="/products/$category/$productId" params={{ category: p.category, productId: p.id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
