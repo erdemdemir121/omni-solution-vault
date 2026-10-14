@@ -1,7 +1,8 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
-import { getCategory, productsIn } from "@/data/products";
+import { getCategory, productsIn, locCategory, locProduct } from "@/data/products";
+import { useLang } from "@/lib/i18n";
 import { PageHero } from "@/components/site/Layout";
 import { ProductCard } from "@/components/site/ProductCard";
 
@@ -21,14 +22,16 @@ export const Route = createFileRoute("/products/$category/")({
 });
 
 function CategoryPage() {
-  const { category } = Route.useLoaderData();
+  const { category: raw } = Route.useLoaderData();
+  const { tx, lang } = useLang();
+  const category = locCategory(raw, lang);
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<"default" | "az" | "za">("default");
   const list = useMemo(() => {
-    let l = productsIn(category.id).filter((p) => (p.title + p.subtitleTr + p.tags.join(" ")).toLowerCase().includes(q.toLowerCase()));
-    if (sort !== "default") l = [...l].sort((a, b) => (sort === "az" ? 1 : -1) * a.title.localeCompare(b.title));
+    let l = productsIn(category.id).filter((p) => (p.title + p.subtitleTr + p.tags.join(" ") + p.tagsTr.join(" ")).toLocaleLowerCase(lang).includes(q.toLocaleLowerCase(lang)));
+    if (sort !== "default") l = [...l].sort((a, b) => (sort === "az" ? 1 : -1) * locProduct(a, lang).title.localeCompare(locProduct(b, lang).title, lang));
     return l;
-  }, [category.id, q, sort]);
+  }, [category.id, q, sort, lang]);
 
   return (
     <>
@@ -42,18 +45,18 @@ function CategoryPage() {
         <div className="container-page py-12">
           <div className="flex flex-col sm:flex-row gap-3 justify-between">
             <label className="relative flex-1 max-w-md">
-              <span className="sr-only">Search products</span>
+              <span className="sr-only">{tx("Search products", "Ürün ara")}</span>
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Filter by name or tag…" className="w-full rounded-md border bg-card py-2.5 pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={tx("Filter by name or tag…", "Ada veya etikete göre filtrele…")} className="w-full rounded-md border bg-card py-2.5 pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-ring" />
             </label>
-            <select aria-label="Sort" value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="rounded-md border bg-card px-3 py-2.5 text-sm">
-              <option value="default">Featured</option>
-              <option value="az">Name A–Z</option>
-              <option value="za">Name Z–A</option>
+            <select aria-label={tx("Sort", "Sırala")} value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="rounded-md border bg-card px-3 py-2.5 text-sm">
+              <option value="default">{tx("Featured", "Öne çıkanlar")}</option>
+              <option value="az">{tx("Name A–Z", "Ad A–Z")}</option>
+              <option value="za">{tx("Name Z–A", "Ad Z–A")}</option>
             </select>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">{list.map((p) => <ProductCard key={p.id} p={p} />)}</div>
-          {list.length === 0 && <p className="mt-8 text-muted-foreground">No products match your filter.</p>}
+          {list.length === 0 && <p className="mt-8 text-muted-foreground">{tx("No products match your filter.", "Filtrenize uygun ürün bulunamadı.")}</p>}
         </div>
       </div>
     </>
