@@ -56,7 +56,7 @@ export function Navbar() {
         </nav>
         <div className="flex items-center gap-2">
           <button onClick={toggle} className="flex items-center gap-1 rounded-md border border-navy-2 px-2.5 py-1.5 text-xs font-semibold text-navy-foreground hover:bg-navy-2" aria-label={tx("Switch to Turkish", "İngilizceye geç")}>
-            <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "TR" : "EN"}
+            <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "EN" : "TR"}
           </button>
           <Link to="/contact" className="hidden sm:inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-glow transition-colors">{t("quote")}</Link>
           <button className="lg:hidden p-2 text-navy-foreground" onClick={() => setOpen(true)} aria-label={tx("Open menu", "Menüyü aç")}><Menu /></button>
