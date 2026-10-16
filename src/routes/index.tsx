@@ -83,13 +83,13 @@ function Home() {
           <h2 className="text-3xl font-extrabold tracking-tight">{tx("Official Representations", "Resmi Temsilcilikler")}</h2>
           <p className="mt-2 text-muted-foreground">{tx("Trusted global manufacturers, represented and supported locally by AES.", "AES tarafından yerel olarak temsil edilen ve desteklenen güvenilir küresel üreticiler.")}</p>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {partners.map(([n, d, id]) => (
-              <div key={n} className="card-hover rounded-xl border bg-card p-8">
+            {partners.map(({ name, desc, url }) => (
+              <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card-hover group rounded-xl border bg-card p-8">
                 <Award className="h-8 w-8 text-primary" />
-                <h3 className="mt-4 text-2xl font-extrabold">{n}</h3>
-                <p className="mt-2 text-muted-foreground">{d}</p>
-                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("View product", "Ürünü incele")} <ArrowRight className="h-4 w-4" /></Link>
-              </div>
+                <h3 className="mt-4 text-2xl font-extrabold">{name}</h3>
+                <p className="mt-2 text-muted-foreground">{desc}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("Visit website", "Web sitesini ziyaret et")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+              </a>
             ))}
           </div>
         </div>
