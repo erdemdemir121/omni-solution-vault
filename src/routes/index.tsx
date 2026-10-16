@@ -26,9 +26,11 @@ function Home() {
     ["20+", tx("Years of Engineering Experience", "Yıllık Mühendislik Deneyimi")],
     ["100%", tx("Field Tested", "Sahada Test Edildi")],
   ];
-  const partners: [string, string, string][] = [
-    ["Applied Precision", tx("Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "Türkiye ve Irak resmi distribütörü — otomatik elektrik sayacı test masaları ve kalibrasyon sistemleri."), "applied-precision-meter-test"],
-    ["Vicentinos", tx("Silicone rubber composite insulators and line hardware for transmission and distribution.", "İletim ve dağıtım için silikon kauçuk kompozit izolatörler ve hat donanımı."), "vicentinos-insulators"],
+  const partners: { name: string; desc: string; url: string }[] = [
+    { name: "İzoelektro", desc: tx("Slovenian manufacturer of low and medium voltage surge arresters and MV composite insulators, trusted in 40+ countries.", "Slovenya merkezli alçak ve orta gerilim parafudr ve OG kompozit izolatör üreticisi; 40'tan fazla ülkede tercih ediliyor."), url: "https://www.izoelektro.com/" },
+    { name: "Greenwood Power", desc: tx("Austrian developer of non-conventional voltage and current sensors (LPIT/LPVT/LPCT) for the medium voltage grid, IEC 61869 certified.", "Orta gerilim şebekesi için IEC 61869 sertifikalı konvansiyonel olmayan gerilim ve akım sensörleri (LPIT/LPVT/LPCT) geliştiren Avusturyalı firma."), url: "https://www.greenwood-power.com/" },
+    { name: "Applied Precision", desc: tx("Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "Türkiye ve Irak resmi distribütörü — otomatik elektrik sayacı test masaları ve kalibrasyon sistemleri."), url: "https://www.appliedprecision.eu/" },
+    { name: "Vicentinos", desc: tx("Silicone rubber composite insulators and line hardware for transmission and distribution.", "İletim ve dağıtım için silikon kauçuk kompozit izolatörler ve hat donanımı."), url: "https://www.vicentinos.com.br/" },
   ];
   return (
     <>
