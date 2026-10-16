@@ -57,27 +57,15 @@ function ProductDetail() {
           <span className="text-xs font-bold uppercase tracking-wider text-primary">{category.name}</span>
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">{p.title}</h1>
           <p className="mt-1 text-lg font-medium text-muted-foreground">{p.subtitle}</p>
-          <div className="mt-4 flex flex-wrap gap-1.5">{p.tags.map((t) => <Tag key={t}>{t}</Tag>)}</div>
-          <p className="mt-6 leading-relaxed text-foreground/85">{p.overview}</p>
           <button onClick={() => { setOpen(true); setSent(false); }} className="mt-6 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary-glow">{tx("Inquire About This Product", "Bu Ürün Hakkında Bilgi Al")}</button>
 
-          <h2 className="mt-10 text-xl font-bold">{tx("Key Features", "Temel Özellikler")}</h2>
-          <ul className="mt-4 space-y-3">
-            {p.features.map((f) => <li key={f} className="flex gap-3"><CheckCircle2 className="h-5 w-5 shrink-0 text-primary" /><span>{f}</span></li>)}
-          </ul>
-
-          <h2 className="mt-10 text-xl font-bold">{tx("Technical Specifications", "Teknik Özellikler")}</h2>
-          <div className="mt-4 overflow-hidden rounded-xl border">
-            <table className="w-full text-sm">
-              <tbody>
-                {p.specs.map(([k, v], i) => (
-                  <tr key={k} className={i % 2 ? "bg-card" : "bg-surface"}>
-                    <th scope="row" className="w-2/5 px-4 py-3 text-left font-semibold">{k}</th>
-                    <td className="px-4 py-3 text-muted-foreground">{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-8 space-y-3">
+            {p.body.length === 0 && <p className="text-muted-foreground">{tx("Detailed information is available on request.", "Detaylı bilgi talep üzerine gönderilir.")}</p>}
+            {p.body.map(([type, text], i) =>
+              type === "h" ? <h2 key={i} className="pt-5 text-lg font-bold">{text}</h2>
+              : type === "li" ? <div key={i} className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span>{text}</span></div>
+              : <p key={i} className="leading-relaxed text-foreground/85">{text}</p>,
+            )}
           </div>
         </div>
       </div>
