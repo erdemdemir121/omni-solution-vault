@@ -26,9 +26,11 @@ function Home() {
     ["20+", tx("Years of Engineering Experience", "Yıllık Mühendislik Deneyimi")],
     ["100%", tx("Field Tested", "Sahada Test Edildi")],
   ];
-  const partners: [string, string, string][] = [
-    ["Applied Precision", tx("Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "Türkiye ve Irak resmi distribütörü — otomatik elektrik sayacı test masaları ve kalibrasyon sistemleri."), "applied-precision-meter-test"],
-    ["Vicentinos", tx("Silicone rubber composite insulators and line hardware for transmission and distribution.", "İletim ve dağıtım için silikon kauçuk kompozit izolatörler ve hat donanımı."), "vicentinos-insulators"],
+  const partners: { name: string; desc: string; url: string }[] = [
+    { name: "İzoelektro", desc: tx("Slovenian manufacturer of low and medium voltage surge arresters and MV composite insulators, trusted in 40+ countries.", "Slovenya merkezli alçak ve orta gerilim parafudr ve OG kompozit izolatör üreticisi; 40'tan fazla ülkede tercih ediliyor."), url: "https://www.izoelektro.com/" },
+    { name: "Greenwood Power", desc: tx("Austrian developer of non-conventional voltage and current sensors (LPIT/LPVT/LPCT) for the medium voltage grid, IEC 61869 certified.", "Orta gerilim şebekesi için IEC 61869 sertifikalı konvansiyonel olmayan gerilim ve akım sensörleri (LPIT/LPVT/LPCT) geliştiren Avusturyalı firma."), url: "https://www.greenwood-power.com/" },
+    { name: "Applied Precision", desc: tx("Official distributor for Türkiye & Iraq — automated electricity meter test benches and calibration systems.", "Türkiye ve Irak resmi distribütörü — otomatik elektrik sayacı test masaları ve kalibrasyon sistemleri."), url: "https://www.appliedprecision.eu/" },
+    { name: "Vicentinos", desc: tx("Silicone rubber composite insulators and line hardware for transmission and distribution.", "İletim ve dağıtım için silikon kauçuk kompozit izolatörler ve hat donanımı."), url: "https://www.vicentinos.com.br/" },
   ];
   return (
     <>
@@ -81,13 +83,13 @@ function Home() {
           <h2 className="text-3xl font-extrabold tracking-tight">{tx("Official Representations", "Resmi Temsilcilikler")}</h2>
           <p className="mt-2 text-muted-foreground">{tx("Trusted global manufacturers, represented and supported locally by AES.", "AES tarafından yerel olarak temsil edilen ve desteklenen güvenilir küresel üreticiler.")}</p>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {partners.map(([n, d, id]) => (
-              <div key={n} className="card-hover rounded-xl border bg-card p-8">
+            {partners.map(({ name, desc, url }) => (
+              <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card-hover group rounded-xl border bg-card p-8">
                 <Award className="h-8 w-8 text-primary" />
-                <h3 className="mt-4 text-2xl font-extrabold">{n}</h3>
-                <p className="mt-2 text-muted-foreground">{d}</p>
-                <Link to="/products/$category/$productId" params={{ category: "other-products", productId: id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("View product", "Ürünü incele")} <ArrowRight className="h-4 w-4" /></Link>
-              </div>
+                <h3 className="mt-4 text-2xl font-extrabold">{name}</h3>
+                <p className="mt-2 text-muted-foreground">{desc}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("Visit website", "Web sitesini ziyaret et")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+              </a>
             ))}
           </div>
         </div>
