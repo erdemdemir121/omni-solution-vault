@@ -20,7 +20,11 @@ function About() {
   return (
     <>
       <PageHero eyebrow={tx("Corporate Profile", "Kurumsal Profil")} title={tx("Engineering a more reliable grid", "Daha güvenilir bir şebeke tasarlıyoruz")}>
-        {tx("AES Akıllı Enerji Sistemleri was founded in 2019 in Istanbul by engineers with over 20 years of cumulative experience in electrical engineering and energy distribution.", "AES Akıllı Enerji Sistemleri, elektrik mühendisliği ve enerji dağıtımında 20 yılı aşkın toplam deneyime sahip mühendisler tarafından 2019 yılında İstanbul'da kuruldu.")}
+        <div className="space-y-4">
+          <p>{tx("At AES, we supply and manufacture electronic products. We bring in high-quality products from abroad according to the needs of the sector.", "AES olarak elektronik ürünlerin tedariğini sağlıyor ve üretiyoruz. Sektörün ihtiyacına göre yüksek kalite ürünleri yurt dışından getiriyoruz.")}</p>
+          <p>{tx("With our engineering expertise and R&D capabilities, we deliver reliable, precise and sustainable products that increase energy efficiency, improve workplace safety and optimise operational processes. Our solutions are designed to drive the transformation of the electricity distribution sector and to enable more effective and safer energy management.", "Mühendislik uzmanlığımız ve Ar-Ge yeteneklerimizle, enerji verimliliğini artıran, işyeri güvenliğini iyileştiren ve operasyonel süreçleri optimize eden güvenilir, hassas ve sürdürülebilir ürünler sunuyoruz. Çözümlerimiz, elektrik dağıtım sektörünün dönüşümünü yönlendirmek, daha etkili ve güvenli enerji yönetimi sağlamak için tasarlanmıştır.")}</p>
+          <p>{tx("As AES Enerji Sistemleri, we are committed to continuously adding value to the sector with innovative solutions, strong partnerships and customer-focused services.", "AES Enerji Sistemleri olarak sektöre sürekli değer katarak yenilikçi çözümler, güçlü ortaklıklar ve müşteri odaklı hizmetler sunmaya kararlıyız.")}</p>
+        </div>
       </PageHero>
       <section className="container-page grid gap-6 py-16 md:grid-cols-3">
         {[[Calendar, "2019", tx("Founded in Istanbul", "İstanbul'da kuruldu")], [Users, tx("20+ years", "20+ yıl"), tx("Cumulative engineering experience", "Toplam mühendislik deneyimi")], [Zap, tx("5 product lines", "5 ürün ailesi"), tx("OMNI family + partner solutions", "OMNI ailesi + iş ortağı çözümleri")]].map(([I, v, l]) => {

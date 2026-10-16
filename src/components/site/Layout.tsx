@@ -134,7 +134,7 @@ export function PageHero({ eyebrow, title, children }: { eyebrow?: string; title
       <div className="container-page py-16 md:py-20">
         {eyebrow && <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-glow">{eyebrow}</span>}
         <h1 className="mt-4 max-w-3xl text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h1>
-        {children && <div className="mt-4 max-w-2xl text-navy-foreground/75">{children}</div>}
+        {children && <div className="mt-4 max-w-3xl text-navy-foreground/75">{children}</div>}
       </div>
     </section>
   );
