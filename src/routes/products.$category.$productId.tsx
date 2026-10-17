@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronRight, Download, CheckCircle2, X, Send } from "lucide-react";
 import { getCategory, getProduct, productsIn, locCategory, locProduct } from "@/data/products";
 import { useLang } from "@/lib/i18n";
-import { Tag } from "@/components/site/Layout";
+
 import { ProductCard, Schematic } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/products/$category/$productId")({

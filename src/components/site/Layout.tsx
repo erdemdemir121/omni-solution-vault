@@ -40,7 +40,6 @@ export function Navbar() {
             {dd && (
               <div className="absolute left-1/2 top-full -translate-x-1/2 pt-3">
                 <div className="w-72 rounded-xl border bg-popover p-2 shadow-elevated">
-                  <Link to="/products" className="block rounded-lg px-3 py-2 text-sm font-semibold text-primary hover:bg-accent" onClick={() => setDd(false)}>{t("allProducts")}</Link>
                   {cats.map((c) => (
                     <Link key={c.id} to="/products/$category" params={{ category: c.id }} onClick={() => setDd(false)} className="block rounded-lg px-3 py-2 hover:bg-accent">
                       <div className="text-sm font-semibold text-foreground">{c.name}</div>
