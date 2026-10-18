@@ -6,6 +6,8 @@ import { useLang } from "@/lib/i18n";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About Us — AES Energy" },
       { name: "description", content: "Founded in 2019, AES Energy brings 20+ years of electrical engineering experience to smart grid reliability and safety." },
       { property: "og:title", content: "About AES Energy" },

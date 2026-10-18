@@ -6,6 +6,8 @@ import { useLang } from "@/lib/i18n";
 export const Route = createFileRoute("/quality")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Quality, Environment & Safety — AES Energy" },
       { name: "description", content: "AES Energy's quality, environmental and occupational health & safety policies." },
       { property: "og:title", content: "Quality, Environment & Safety — AES Energy" },

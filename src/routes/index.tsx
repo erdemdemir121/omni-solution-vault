@@ -6,6 +6,8 @@ import { useLang } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "AES Energy — Smart Grid & Energy Reliability" },
       { name: "description", content: "OMNI family of smart grid monitoring, safety, fault detection and asset analytics solutions from AES Energy, Istanbul." },
       { property: "og:title", content: "AES Energy — Smart Grid & Energy Reliability" },
