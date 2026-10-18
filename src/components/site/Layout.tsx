@@ -1,3 +1,4 @@
+import { siteImages } from "@/data/images";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X, Zap, Mail, Phone, MapPin, Globe } from "lucide-react";
 import { useState } from "react";
@@ -7,9 +8,7 @@ import { useLang } from "@/lib/i18n";
 export function Logo({ light = false }: { light?: boolean }) {
   return (
     <Link to="/" className="flex items-center gap-2" aria-label="AES Energy home">
-      <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground">
-        <Zap className="h-5 w-5" fill="currentColor" />
-      </span>
+      <span className="grid h-11 w-11 place-items-center rounded-lg bg-card p-0.5"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
       <span className={`leading-tight ${light ? "text-navy-foreground" : "text-foreground"}`}>
         <span className="block text-lg font-extrabold tracking-tight">AES Energy</span>
         <span className="block text-[10px] uppercase tracking-[0.18em] opacity-70">Akıllı Enerji Sistemleri</span>
