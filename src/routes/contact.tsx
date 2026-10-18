@@ -9,6 +9,8 @@ export const Route = createFileRoute("/contact")({
   validateSearch: (s: Record<string, unknown>): { product?: string | undefined } => ({ product: typeof s["product"] === "string" ? (s["product"] as string) : undefined }),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Contact — AES Energy" },
       { name: "description", content: "Contact AES Energy in Kartal, Istanbul. +90 216 504 6570 · info@aesenergy.com.tr" },
       { property: "og:title", content: "Contact AES Energy" },

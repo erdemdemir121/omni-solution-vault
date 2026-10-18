@@ -8,6 +8,8 @@ import { ProductCard } from "@/components/site/ProductCard";
 export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Products & Solutions — AES Energy" },
       { name: "description", content: "Full catalog of AES OMNIGRID, OMNISAFE, OMNIDETECT, OMNIASSET and partner products." },
       { property: "og:title", content: "Products & Solutions — AES Energy" },

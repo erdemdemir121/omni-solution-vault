@@ -17,7 +17,7 @@ export const Route = createFileRoute("/products/$category/$productId")({
     if (!loaderData) return { meta: [{ title: "Not found" }, { name: "robots", content: "noindex" }] };
     const p = loaderData.product;
     const title = `${p.title} | ${loaderData.category.name} — AES Energy`;
-    return { meta: [{ title }, { name: "description", content: p.short }, { property: "og:title", content: title }, { property: "og:description", content: p.short }] };
+    return { meta: [{ property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { title }, { name: "description", content: p.short }, { property: "og:title", content: title }, { property: "og:description", content: p.short }] };
   },
   component: ProductDetail,
 });
