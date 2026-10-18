@@ -1,5 +1,6 @@
+import { siteImages } from "@/data/images";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, X, Zap, Mail, Phone, MapPin, Globe } from "lucide-react";
+import { ChevronDown, Menu, X, Mail, Phone, MapPin, Globe } from "lucide-react";
 import { useState } from "react";
 import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
@@ -7,9 +8,7 @@ import { useLang } from "@/lib/i18n";
 export function Logo({ light = false }: { light?: boolean }) {
   return (
     <Link to="/" className="flex items-center gap-2" aria-label="AES Energy home">
-      <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground">
-        <Zap className="h-5 w-5" fill="currentColor" />
-      </span>
+      <span className="grid h-11 w-11 place-items-center rounded-lg bg-card p-0.5"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
       <span className={`leading-tight ${light ? "text-navy-foreground" : "text-foreground"}`}>
         <span className="block text-lg font-extrabold tracking-tight">AES Energy</span>
         <span className="block text-[10px] uppercase tracking-[0.18em] opacity-70">Akıllı Enerji Sistemleri</span>
@@ -127,10 +126,11 @@ export function Footer() {
   );
 }
 
-export function PageHero({ eyebrow, title, children }: { eyebrow?: string; title: string; children?: React.ReactNode }) {
+export function PageHero({ eyebrow, title, children, image }: { eyebrow?: string; title: string; children?: React.ReactNode; image?: string }) {
   return (
-    <section className="bg-gradient-navy grid-pattern text-navy-foreground">
-      <div className="container-page py-16 md:py-20">
+    <section className="relative overflow-hidden bg-gradient-navy grid-pattern text-navy-foreground">
+      {image && <><img src={image} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-navy/80" /></>}
+      <div className="container-page relative py-16 md:py-20">
         {eyebrow && <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-glow">{eyebrow}</span>}
         <h1 className="mt-4 max-w-3xl text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h1>
         {children && <div className="mt-4 max-w-3xl text-navy-foreground/75">{children}</div>}

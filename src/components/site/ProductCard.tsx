@@ -3,12 +3,15 @@ import { ArrowRight } from "lucide-react";
 import { locProduct, type Product } from "@/data/products";
 import { Tag } from "./Layout";
 import { useLang } from "@/lib/i18n";
+import { productImages } from "@/data/images";
 
 export function ProductCard({ p: raw }: { p: Product }) {
   const { t, lang } = useLang();
   const p = locProduct(raw, lang);
   return (
-    <article className="card-hover flex flex-col rounded-xl border bg-card p-6">
+    <article className="card-hover flex flex-col overflow-hidden rounded-xl border bg-card">
+      {productImages[p.id] && <div className="aspect-[4/3] bg-surface"><img src={productImages[p.id]} alt={p.title} loading="lazy" className="h-full w-full object-contain p-3" /></div>}
+      <div className="flex flex-1 flex-col p-6">
       <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
       <p className="mt-1 text-sm font-medium text-primary">{p.subtitle}</p>
       <p className="mt-3 flex-1 text-sm text-muted-foreground">{p.short}</p>
@@ -16,6 +19,7 @@ export function ProductCard({ p: raw }: { p: Product }) {
       <Link to="/products/$category/$productId" params={{ category: p.category, productId: p.id }} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
         {t("details")} <ArrowRight className="h-4 w-4" />
       </Link>
+      </div>
     </article>
   );
 }
@@ -34,4 +38,10 @@ export function Schematic({ label }: { label: string }) {
       <span className="absolute bottom-3 left-3 rounded bg-navy/80 px-2 py-1 font-mono text-xs text-navy-foreground">{label}</span>
     </div>
   );
+}
+
+export function ProductPhoto({ id, alt }: { id: string; alt: string }) {
+  const src = productImages[id];
+  if (!src) return <Schematic label={id} />;
+  return <div className="aspect-[4/3] overflow-hidden rounded-xl border bg-card"><img src={src} alt={alt} className="h-full w-full object-contain p-4" /></div>;
 }

@@ -4,7 +4,7 @@ import { ChevronRight, Download, CheckCircle2, X, Send } from "lucide-react";
 import { getCategory, getProduct, productsIn, locCategory, locProduct } from "@/data/products";
 import { useLang } from "@/lib/i18n";
 
-import { ProductCard, Schematic } from "@/components/site/ProductCard";
+import { ProductCard, ProductPhoto } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/products/$category/$productId")({
   loader: ({ params }) => {
@@ -44,10 +44,7 @@ function ProductDetail() {
 
       <div className="container-page grid gap-12 py-12 lg:grid-cols-2">
         <div className="space-y-4 lg:sticky lg:top-24 self-start">
-          <Schematic label={`${category.name} / ${p.id}`} />
-          <div className="grid grid-cols-3 gap-3">
-            {[1, 2, 3].map((i) => <div key={i} className="aspect-video rounded-lg bg-gradient-navy grid-pattern opacity-80" />)}
-          </div>
+          <ProductPhoto id={p.id} alt={p.title} />
           <button onClick={() => alert(tx("Datasheet will be sent upon request. Please contact info@aesenergy.com.tr", "Teknik föy talep üzerine gönderilir. Lütfen info@aesenergy.com.tr adresine yazın."))} className="flex w-full items-center justify-center gap-2 rounded-md border-2 border-primary px-4 py-3 font-semibold text-primary hover:bg-accent">
             <Download className="h-4 w-4" /> {tx("Download Datasheet (PDF)", "Teknik Föyü İndir (PDF)")}
           </button>
