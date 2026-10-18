@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BadgeCheck, Leaf, HardHat } from "lucide-react";
+import { siteImages } from "@/data/images";
 import { PageHero } from "@/components/site/Layout";
 import { useLang } from "@/lib/i18n";
 
@@ -28,7 +29,7 @@ function Quality() {
   const policies = policiesData.map((p) => ({ ...p, title: lang === "tr" ? p.title[1] : p.title[0], items: lang === "tr" ? p.itemsTr : p.items }));
   return (
     <>
-      <PageHero eyebrow={tx("Policies", "Politikalar")} title={tx("Quality, Environment & Safety", "Kalite, Çevre ve Güvenlik")}>{tx("Integrated management principles that guide how we design, build and support every product.", "Her ürünü nasıl tasarladığımıza, ürettiğimize ve desteklediğimize yön veren entegre yönetim ilkeleri.")}</PageHero>
+      <PageHero image={siteImages.quality} eyebrow={tx("Policies", "Politikalar")} title={tx("Quality, Environment & Safety", "Kalite, Çevre ve Güvenlik")}>{tx("Integrated management principles that guide how we design, build and support every product.", "Her ürünü nasıl tasarladığımıza, ürettiğimize ve desteklediğimize yön veren entegre yönetim ilkeleri.")}</PageHero>
       <div className="container-page grid gap-6 py-16 lg:grid-cols-3">
         {policies.map(({ icon: Icon, title, std, items }) => (
           <section key={title} className="rounded-xl border bg-card p-8">

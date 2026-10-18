@@ -1,6 +1,6 @@
 import { siteImages } from "@/data/images";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, X, Zap, Mail, Phone, MapPin, Globe } from "lucide-react";
+import { ChevronDown, Menu, X, Mail, Phone, MapPin, Globe } from "lucide-react";
 import { useState } from "react";
 import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
@@ -126,10 +126,11 @@ export function Footer() {
   );
 }
 
-export function PageHero({ eyebrow, title, children }: { eyebrow?: string; title: string; children?: React.ReactNode }) {
+export function PageHero({ eyebrow, title, children, image }: { eyebrow?: string; title: string; children?: React.ReactNode; image?: string }) {
   return (
-    <section className="bg-gradient-navy grid-pattern text-navy-foreground">
-      <div className="container-page py-16 md:py-20">
+    <section className="relative overflow-hidden bg-gradient-navy grid-pattern text-navy-foreground">
+      {image && <><img src={image} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-navy/80" /></>}
+      <div className="container-page relative py-16 md:py-20">
         {eyebrow && <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-glow">{eyebrow}</span>}
         <h1 className="mt-4 max-w-3xl text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h1>
         {children && <div className="mt-4 max-w-3xl text-navy-foreground/75">{children}</div>}

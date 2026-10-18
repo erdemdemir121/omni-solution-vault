@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Target, Eye, FlaskConical, Calendar, Users, Zap } from "lucide-react";
+import { siteImages } from "@/data/images";
 import { PageHero } from "@/components/site/Layout";
 import { useLang } from "@/lib/i18n";
 
@@ -21,7 +22,7 @@ function About() {
   const { tx } = useLang();
   return (
     <>
-      <PageHero eyebrow={tx("Corporate Profile", "Kurumsal Profil")} title={tx("Engineering a more reliable grid", "Daha güvenilir bir şebeke tasarlıyoruz")}>
+      <PageHero image={siteImages.about} eyebrow={tx("Corporate Profile", "Kurumsal Profil")} title={tx("Engineering a more reliable grid", "Daha güvenilir bir şebeke tasarlıyoruz")}>
         <div className="space-y-4">
           <p>{tx("At AES, we supply and manufacture electronic products. We bring in high-quality products from abroad according to the needs of the sector.", "AES olarak elektronik ürünlerin tedariğini sağlıyor ve üretiyoruz. Sektörün ihtiyacına göre yüksek kalite ürünleri yurt dışından getiriyoruz.")}</p>
           <p>{tx("With our engineering expertise and R&D capabilities, we deliver reliable, precise and sustainable products that increase energy efficiency, improve workplace safety and optimise operational processes. Our solutions are designed to drive the transformation of the electricity distribution sector and to enable more effective and safer energy management.", "Mühendislik uzmanlığımız ve Ar-Ge yeteneklerimizle, enerji verimliliğini artıran, işyeri güvenliğini iyileştiren ve operasyonel süreçleri optimize eden güvenilir, hassas ve sürdürülebilir ürünler sunuyoruz. Çözümlerimiz, elektrik dağıtım sektörünün dönüşümünü yönlendirmek, daha etkili ve güvenli enerji yönetimi sağlamak için tasarlanmıştır.")}</p>
