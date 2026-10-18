@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep official catalog blocks in `src/data/catalog.gen.ts` with separate, complete EN/TR arrays; `products.ts` selects a locale without cross-language fallback so untranslated content cannot silently leak into a page.

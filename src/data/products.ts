@@ -118,9 +118,9 @@ function summary(body: Block[]): string {
 
 export const products: Product[] = rawProducts.map((r) => {
   const [en, tr] = names[r.id] ?? [r.title, r.titleTr];
-  // Use the Turkish body when the English page is empty, and vice versa.
-  const body = r.body.length ? r.body : r.bodyTr;
-  const bodyTr = r.bodyTr.length ? r.bodyTr : r.body;
+  // Keep languages separate; never show the other language as a fallback.
+  const body = r.body;
+  const bodyTr = r.bodyTr;
   return {
     id: r.id,
     category: r.category as CategoryId,
