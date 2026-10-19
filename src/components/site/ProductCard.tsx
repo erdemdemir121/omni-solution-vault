@@ -43,5 +43,5 @@ export function Schematic({ label }: { label: string }) {
 export function ProductPhoto({ id, alt }: { id: string; alt: string }) {
   const src = productImages[id];
   if (!src) return <Schematic label={id} />;
-  return <div className="aspect-[4/3] overflow-hidden rounded-xl border bg-card"><img src={src} alt={alt} className="h-full w-full object-contain p-4" /></div>;
+  return <div className="overflow-hidden rounded-xl border bg-card"><img src={src} alt={alt} className="block h-auto max-h-[70vh] w-full object-contain" /></div>;
 }
