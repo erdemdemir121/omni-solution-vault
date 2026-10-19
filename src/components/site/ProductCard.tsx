@@ -10,7 +10,7 @@ export function ProductCard({ p: raw }: { p: Product }) {
   const p = locProduct(raw, lang);
   return (
     <article className="card-hover flex flex-col overflow-hidden rounded-xl border bg-card">
-      {productImages[p.id] && <div className="aspect-[4/3] bg-surface"><img src={productImages[p.id]} alt={p.title} loading="lazy" className="h-full w-full object-contain p-3" /></div>}
+      {productImages[p.id] && <div className="h-56 shrink-0 overflow-hidden bg-surface"><img src={productImages[p.id]} alt={p.title} loading="lazy" className="h-full w-full object-cover" /></div>}
       <div className="flex flex-1 flex-col p-6">
       <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
       <p className="mt-1 text-sm font-medium text-primary">{p.subtitle}</p>
