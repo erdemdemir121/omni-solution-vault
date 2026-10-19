@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronRight, Download, CheckCircle2, X, Send } from "lucide-react";
+import { ChevronRight, CheckCircle2, X, Send } from "lucide-react";
 import { getCategory, getProduct, productsIn, locCategory, locProduct } from "@/data/products";
 import { useLang } from "@/lib/i18n";
 
@@ -45,9 +45,6 @@ function ProductDetail() {
       <div className="container-page grid gap-12 py-12 lg:grid-cols-2">
         <div className="space-y-4 lg:sticky lg:top-24 self-start">
           <ProductPhoto id={p.id} alt={p.title} />
-          <button onClick={() => alert(tx("Datasheet will be sent upon request. Please contact info@aesenergy.com.tr", "Teknik föy talep üzerine gönderilir. Lütfen info@aesenergy.com.tr adresine yazın."))} className="flex w-full items-center justify-center gap-2 rounded-md border-2 border-primary px-4 py-3 font-semibold text-primary hover:bg-accent">
-            <Download className="h-4 w-4" /> {tx("Download Datasheet (PDF)", "Teknik Föyü İndir (PDF)")}
-          </button>
         </div>
 
         <div>

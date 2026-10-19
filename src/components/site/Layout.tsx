@@ -5,20 +5,21 @@ import { useState } from "react";
 import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
 
-export function Logo({ light = false }: { light?: boolean }) {
+export function Logo(_: { light?: boolean }) {
+  const { tx } = useLang();
   return (
     <Link to="/" className="flex items-center gap-2" aria-label="AES Energy home">
-      <span className="grid h-11 w-11 place-items-center rounded-lg bg-card p-0.5"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
-      <span className={`leading-tight ${light ? "text-navy-foreground" : "text-foreground"}`}>
+      <span className="grid h-14 w-14 place-items-center"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
+      <span className="leading-tight text-foreground">
         <span className="block text-lg font-extrabold tracking-tight">AES Energy</span>
-        <span className="block text-[10px] uppercase tracking-[0.18em] opacity-70">Akıllı Enerji Sistemleri</span>
+        <span className="block text-[10px] uppercase tracking-[0.18em] opacity-70">{tx("Smart Energy Systems", "Akıllı Enerji Sistemleri")}</span>
       </span>
     </Link>
   );
 }
 
-const linkCls = "text-sm font-medium text-navy-foreground/80 hover:text-navy-foreground transition-colors";
-const active = { className: "text-navy-foreground" };
+const linkCls = "text-sm font-medium text-foreground/80 hover:text-primary transition-colors";
+const active = { className: "text-primary" };
 
 export function Navbar() {
   const { t, lang, toggle, tx } = useLang();
@@ -26,8 +27,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [dd, setDd] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-navy border-b border-navy-2">
-      <div className="container-page flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 bg-background border-b">
+      <div className="container-page flex h-20 items-center justify-between">
         <Logo light />
         <nav className="hidden lg:flex items-center gap-7" aria-label={tx("Main", "Ana menü")}>
           <Link to="/" className={linkCls} activeProps={active} activeOptions={{ exact: true }}>{t("home")}</Link>
@@ -53,20 +54,20 @@ export function Navbar() {
           <Link to="/contact" className={linkCls} activeProps={active}>{t("contact")}</Link>
         </nav>
         <div className="flex items-center gap-2">
-          <button onClick={toggle} className="flex items-center gap-1 rounded-md border border-navy-2 px-2.5 py-1.5 text-xs font-semibold text-navy-foreground hover:bg-navy-2" aria-label={tx("Switch to Turkish", "İngilizceye geç")}>
+          <button onClick={toggle} className="flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-semibold text-foreground hover:bg-accent" aria-label={tx("Switch to Turkish", "İngilizceye geç")}>
             <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "EN" : "TR"}
           </button>
           <Link to="/contact" className="hidden sm:inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-glow transition-colors">{t("quote")}</Link>
-          <button className="lg:hidden p-2 text-navy-foreground" onClick={() => setOpen(true)} aria-label={tx("Open menu", "Menüyü aç")}><Menu /></button>
+          <button className="lg:hidden p-2 text-foreground" onClick={() => setOpen(true)} aria-label={tx("Open menu", "Menüyü aç")}><Menu /></button>
         </div>
       </div>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-navy/60" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-80 max-w-[85%] overflow-y-auto bg-navy p-6">
+          <div className="absolute right-0 top-0 h-full w-80 max-w-[85%] overflow-y-auto bg-background p-6">
             <div className="flex justify-between items-center mb-8">
               <Logo light />
-              <button onClick={() => setOpen(false)} className="text-navy-foreground" aria-label={tx("Close menu", "Menüyü kapat")}><X /></button>
+              <button onClick={() => setOpen(false)} className="text-foreground" aria-label={tx("Close menu", "Menüyü kapat")}><X /></button>
             </div>
             <nav className="flex flex-col gap-4" onClick={() => setOpen(false)}>
               <Link to="/" className={linkCls}>{t("home")}</Link>
@@ -90,38 +91,38 @@ export function Footer() {
   const { lang, tx } = useLang();
   const cats = categories.map((c) => locCategory(c, lang));
   return (
-    <footer className="bg-navy text-navy-foreground">
+    <footer className="bg-background text-foreground border-t">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
           <Logo light />
-          <p className="mt-4 text-sm text-navy-foreground/70">{tx("Smart grid monitoring, protection and asset analytics since 2019.", "2019'dan beri akıllı şebeke izleme, koruma ve varlık analitiği.")}</p>
+          <p className="mt-4 text-sm text-foreground/70">{tx("Smart grid monitoring, protection and asset analytics since 2019.", "2019'dan beri akıllı şebeke izleme, koruma ve varlık analitiği.")}</p>
         </div>
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider">{tx("Products", "Ürünler")}</h3>
-          <ul className="mt-4 space-y-2 text-sm text-navy-foreground/70">
+          <ul className="mt-4 space-y-2 text-sm text-foreground/70">
             {cats.map((c) => (
-              <li key={c.id}><Link to="/products/$category" params={{ category: c.id }} className="hover:text-navy-foreground">{c.name}</Link></li>
+              <li key={c.id}><Link to="/products/$category" params={{ category: c.id }} className="hover:text-primary">{c.name}</Link></li>
             ))}
           </ul>
         </div>
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider">{tx("Company", "Kurumsal")}</h3>
-          <ul className="mt-4 space-y-2 text-sm text-navy-foreground/70">
-            <li><Link to="/about" className="hover:text-navy-foreground">{tx("About Us", "Hakkımızda")}</Link></li>
-            <li><Link to="/quality" className="hover:text-navy-foreground">{tx("Quality & Environment", "Kalite & Çevre")}</Link></li>
-            <li><Link to="/contact" className="hover:text-navy-foreground">{tx("Contact", "İletişim")}</Link></li>
+          <ul className="mt-4 space-y-2 text-sm text-foreground/70">
+            <li><Link to="/about" className="hover:text-primary">{tx("About Us", "Hakkımızda")}</Link></li>
+            <li><Link to="/quality" className="hover:text-primary">{tx("Quality & Environment", "Kalite & Çevre")}</Link></li>
+            <li><Link to="/contact" className="hover:text-primary">{tx("Contact", "İletişim")}</Link></li>
           </ul>
         </div>
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider">{tx("Contact", "İletişim")}</h3>
-          <ul className="mt-4 space-y-3 text-sm text-navy-foreground/70">
+          <ul className="mt-4 space-y-3 text-sm text-foreground/70">
             <li className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 mt-0.5" />AC Moment Istanbul B-213, 34880 Kartal / İstanbul</li>
             <li className="flex gap-2"><Phone className="h-4 w-4" /><a href="tel:+902165046570">+90 216 504 6570</a></li>
             <li className="flex gap-2"><Mail className="h-4 w-4" /><a href="mailto:info@aesenergy.com.tr">info@aesenergy.com.tr</a></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-navy-2 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} AES Akıllı Enerji Sistemleri. {tx("All rights reserved.", "Tüm hakları saklıdır.")}</div>
+      <div className="border-t border py-5 text-center text-xs text-foreground/60">© {new Date().getFullYear()} AES Akıllı Enerji Sistemleri. {tx("All rights reserved.", "Tüm hakları saklıdır.")}</div>
     </footer>
   );
 }

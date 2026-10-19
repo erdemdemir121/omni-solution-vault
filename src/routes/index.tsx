@@ -107,7 +107,7 @@ function Home() {
         <div className="container-page">
           <div className="relative overflow-hidden rounded-2xl bg-gradient-primary px-8 py-14 text-center text-primary-foreground">
             <img src={siteImages.cta} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-navy/75" />
+            <div className="absolute inset-0 bg-navy/45" />
             <div className="relative">
             <h2 className="text-3xl font-extrabold">{tx("Ready to make your grid smarter?", "Şebekenizi daha akıllı hale getirmeye hazır mısınız?")}</h2>
             <p className="mt-3 opacity-90">{tx("Talk to our engineers about your network's monitoring and safety needs.", "Şebekenizin izleme ve güvenlik ihtiyaçlarını mühendislerimizle konuşun.")}</p>
