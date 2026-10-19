@@ -9,7 +9,7 @@ export function Logo(_: { light?: boolean }) {
   const { tx } = useLang();
   return (
     <Link to="/" className="flex items-center gap-2" aria-label="AES Energy home">
-      <span className="grid h-14 w-14 place-items-center"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
+      <span className="grid h-16 w-16 place-items-center"><img src={siteImages.logo} alt="AES Akıllı Enerji Sistemleri logo" className="h-full w-full object-contain" /></span>
       <span className="leading-tight text-foreground">
         <span className="block text-lg font-extrabold tracking-tight">AES Energy</span>
         <span className="block text-[10px] uppercase tracking-[0.18em] opacity-70">{tx("Smart Energy Systems", "Akıllı Enerji Sistemleri")}</span>
