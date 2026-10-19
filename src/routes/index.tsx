@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Activity, ShieldCheck, ScanSearch, Gauge, Award } from "lucide-react";
 import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
-import { siteImages, categoryImages } from "@/data/images";
+import { siteImages, categoryImages, partnerLogos } from "@/data/images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,16 +37,17 @@ function Home() {
   ];
   return (
     <>
-      <section className="bg-gradient-navy grid-pattern text-navy-foreground">
-        <div className="container-page py-24 md:py-32">
-          <span className="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-glow">AES Akıllı Enerji Sistemleri</span>
-          <h1 className="mt-6 max-w-4xl text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">{t("heroTitle")}</h1>
-          <p className="mt-6 max-w-2xl text-lg text-navy-foreground/75">{t("heroSub")}</p>
+      <section className="relative overflow-hidden bg-navy text-navy-foreground">
+        <img src={siteImages.hero} alt={tx("AES field team working on electricity lines", "Elektrik hatlarında çalışan AES saha ekibi")} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/20" />
+        <div className="container-page relative py-24 md:py-36">
+          <p className="text-2xl md:text-4xl font-extrabold tracking-tight text-primary-glow">{tx("AES Smart Energy Systems", "AES Akıllı Enerji Sistemleri")}</p>
+          <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">{t("heroTitle")}</h1>
+          <p className="mt-6 max-w-2xl text-lg text-navy-foreground/90">{t("heroSub")}</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to="/products" className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary-glow transition-colors">{t("explore")} <ArrowRight className="h-4 w-4" /></Link>
-            <Link to="/contact" className="inline-flex items-center rounded-md border border-navy-foreground/30 px-6 py-3 font-semibold text-navy-foreground hover:bg-navy-2">{t("sales")}</Link>
+            <Link to="/contact" className="inline-flex items-center rounded-md border border-navy-foreground/50 px-6 py-3 font-semibold text-navy-foreground hover:bg-navy-foreground/10">{t("sales")}</Link>
           </div>
-          <img src={siteImages.hero} alt={tx("AES field team working on an electrical panel", "Elektrik panosunda çalışan AES saha ekibi")} className="mt-14 aspect-[21/9] w-full rounded-2xl border border-navy-foreground/10 object-cover shadow-elevated" />
         </div>
       </section>
 
@@ -92,7 +93,7 @@ function Home() {
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {partners.map(({ name, desc, url }) => (
               <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card-hover group rounded-xl border bg-card p-8">
-                <Award className="h-8 w-8 text-primary" />
+                {partnerLogos[name] ? <img src={partnerLogos[name]} alt={`${name} logo`} loading="lazy" className="h-12 w-auto max-w-[200px] object-contain" /> : <Award className="h-8 w-8 text-primary" />}
                 <h3 className="mt-4 text-2xl font-extrabold">{name}</h3>
                 <p className="mt-2 text-muted-foreground">{desc}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{tx("Visit website", "Web sitesini ziyaret et")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>

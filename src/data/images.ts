@@ -56,3 +56,7 @@ export const categoryImages: Record<string, string> = {
   "other-products": img_catOtherProducts.url,
 };
 export const siteImages = { logo: img_logo.url, hero: img_hero.url, cta: img_cta.url, about: img_about.url, quality: img_quality.url };
+import img_pIzo from "@/assets/aes/partner-izoelektro.svg.asset.json";
+import img_pGw from "@/assets/aes/partner-greenwood.svg.asset.json";
+import img_pVic from "@/assets/aes/partner-vicentinos.png.asset.json";
+export const partnerLogos: Record<string, string> = { "İzoelektro": img_pIzo.url, "Greenwood Power": img_pGw.url, "Vicentinos": img_pVic.url };
