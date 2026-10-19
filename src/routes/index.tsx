@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Activity, ShieldCheck, ScanSearch, Gauge, Award } from "lucide-react";
 import { categories, locCategory } from "@/data/products";
 import { useLang } from "@/lib/i18n";
+import { siteImages, categoryImages } from "@/data/images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +46,7 @@ function Home() {
             <Link to="/products" className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary-glow transition-colors">{t("explore")} <ArrowRight className="h-4 w-4" /></Link>
             <Link to="/contact" className="inline-flex items-center rounded-md border border-navy-foreground/30 px-6 py-3 font-semibold text-navy-foreground hover:bg-navy-2">{t("sales")}</Link>
           </div>
+          <img src={siteImages.hero} alt={tx("AES field team working on an electrical panel", "Elektrik panosunda çalışan AES saha ekibi")} className="mt-14 aspect-[21/9] w-full rounded-2xl border border-navy-foreground/10 object-cover shadow-elevated" />
         </div>
       </section>
 
@@ -56,12 +58,15 @@ function Home() {
             {omni.map((c) => {
               const Icon = icons[c.id as keyof typeof icons];
               return (
-                <Link key={c.id} to="/products/$category" params={{ category: c.id }} className="card-hover group flex flex-col rounded-xl border bg-card p-6">
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent text-primary"><Icon className="h-6 w-6" /></span>
+                <Link key={c.id} to="/products/$category" params={{ category: c.id }} className="card-hover group flex flex-col overflow-hidden rounded-xl border bg-card">
+                  <img src={categoryImages[c.id]} alt={c.name} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                  <div className="flex flex-1 flex-col p-6">
+                  <span className="-mt-12 grid h-12 w-12 place-items-center rounded-lg border bg-card text-primary shadow-elevated"><Icon className="h-6 w-6" /></span>
                   <h3 className="mt-5 text-xl font-extrabold">{c.name}</h3>
                   <p className="text-xs font-semibold uppercase tracking-wide text-primary">{c.tagline}</p>
                   <p className="mt-3 flex-1 text-sm text-muted-foreground">{c.description}</p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{t("discover")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                  </div>
                 </Link>
               );
             })}
@@ -99,10 +104,14 @@ function Home() {
 
       <section className="pb-20">
         <div className="container-page">
-          <div className="rounded-2xl bg-gradient-primary px-8 py-14 text-center text-primary-foreground">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-primary px-8 py-14 text-center text-primary-foreground">
+            <img src={siteImages.cta} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-navy/75" />
+            <div className="relative">
             <h2 className="text-3xl font-extrabold">{tx("Ready to make your grid smarter?", "Şebekenizi daha akıllı hale getirmeye hazır mısınız?")}</h2>
             <p className="mt-3 opacity-90">{tx("Talk to our engineers about your network's monitoring and safety needs.", "Şebekenizin izleme ve güvenlik ihtiyaçlarını mühendislerimizle konuşun.")}</p>
             <Link to="/contact" className="mt-8 inline-flex rounded-md bg-navy px-6 py-3 font-semibold text-navy-foreground hover:bg-navy-2">{t("sales")}</Link>
+            </div>
           </div>
         </div>
       </section>
